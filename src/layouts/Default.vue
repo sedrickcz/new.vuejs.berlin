@@ -1,50 +1,48 @@
 <template>
-  <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metaData.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about">About</g-link>
-      </nav>
-    </header>
-    <slot/>
+  <div class="layout" :class="{'with-menu': withMenu}">
+    <Header :title="title" @logo-click="withMenu = !withMenu" :withMenu="withMenu" />
+    <SideBar @click="withMenu = false" :menu-hint="hintMenu" />
+
+    <article class="content-container">
+      <slot/>
+    </article>
   </div>
 </template>
 
-<static-query>
-query {
-  metaData {
-    siteName
+<script>
+import Header from '@/components/Header'
+import SideBar from '@/components/SideBar.vue'
+
+export default {
+  props: {
+    title: String
+  },
+  components: { Header, SideBar },
+  data () {
+    return {
+      withMenu: false,
+      hintMenu: true
+    }
+  },
+  watch: {
+    $route () {
+      // close menu on route change
+      this.withMenu = false
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('no-menu-hint')) this.hintMenu = false
+    else localStorage.setItem('no-menu-hint', 1)
   }
 }
-</static-query>
+</script>
 
 <style>
-body {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  margin:0;
-  padding:0;
-  line-height: 1.5;
-}
-
 .layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  transition: transform .2s ease;
+  transform: translate(0, 0);
 }
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
-}
-
-.nav__link {
-  margin-left: 20px;
+.layout.with-menu {
+  transform: translate(260px, 0);
 }
 </style>

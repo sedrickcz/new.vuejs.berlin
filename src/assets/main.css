@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'NoName37';
+  src: url('no-name-37.light.woff2') format("woff2"),
+       url('no-name-37.light.woff') format("woff"),
+       url('no-name-37.light.otf') format("opentype");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-size: 20px;
+  font-family: NoName37, sans-serif;
+  color: #35495E;
+}
+a {
+  text-decoration: none;
+  color: #41B883;
+}
+a.go-back {
+  float: left;
+}
+p {
+  line-height: 1.7em;
+}
+article.content-container {
+  display: block;
+  width: calc(100vw - 4rem);
+  max-width: 40rem;
+  margin: auto;
+  padding: 5em 2rem 0;
+}
+@media screen and (max-width: 600px) {
+  .content-container {
+    width: calc(100vw - 2rem);
+    padding: 0 1rem;
+  }
+}

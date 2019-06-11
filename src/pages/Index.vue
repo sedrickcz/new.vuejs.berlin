@@ -1,27 +1,43 @@
 <template>
-  <Layout>
-    
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Example image" src="~/favicon.png" width="135" />
-    
-    <h1>Hello, world!</h1>
-   
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
-
-    <p class="home-links">
-      <a href="https://gridsome.org/docs" target="_blank" rel="noopener">Gridsome Docs</a>
-      <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-    </p>
-
-  </Layout>
+  <LandingPage>
+    <h1>{{ page.title }}</h1>
+    <rich-text-renderer :document="page.content", :nodeRenderers="{'embedded-entry-block': renderEvent}" />
+  </LandingPage>
 </template>
 
+<page-query>
+query IndexPage {
+  contentfulIndexPage(id: "7chaXchzWho3INbTagjzqX") {
+    title
+    content
+  }
+}
+</page-query>
+
 <script>
+import LandingPage from '@/layouts/LandingPage'
+import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
+import Event from '@/components/Event'
+
 export default {
   metaInfo: {
-    title: 'Hello, world!'
+    title: "Vue.js // Berlin"
+  },
+  components: { LandingPage, RichTextRenderer, Event },
+  data () {
+    return {
+    }
+  },
+  computed: {
+    page () {
+      return this.$page.contentfulIndexPage
+    }
+  },
+  methods: {
+    renderEvent (node, key, h, next) {
+      const props = node.data.target.fields
+      return h('Event', {props, key}, next(node.content, key, h, next))
+    }
   }
 }
 </script>

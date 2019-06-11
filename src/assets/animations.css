@@ -1,0 +1,36 @@
+.animated {
+  animation-duration: 10s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.animated.delayed {
+  animation-delay: 2s;
+}
+.animated.delayed-more {
+  animation-delay: 5s;
+}
+.animated.once {
+  animation-iteration-count: 1;
+}
+.animated.twice {
+  animation-iteration-count: 2;
+}
+.animated.thrice {
+  animation-iteration-count: 3;
+}
+
+@keyframes tada {
+  90% { transform: scale3d(1, 1, 1); }
+  91%, 92% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+  93%, 95%, 97%, 99% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+  94%, 96%, 98% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.tada { animation-name: tada; }
+
+@keyframes fade-away {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+.fade-away { animation-name: fade-away; }
