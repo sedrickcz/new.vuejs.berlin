@@ -17,13 +17,13 @@ query IndexPage {
 <script>
 import LandingPage from '@/layouts/LandingPage'
 import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
-import Event from '@/components/Event'
+import NestedEvent from '@/components/NestedEvent'
 
 export default {
   metaInfo: {
     title: "Vue.js // Berlin"
   },
-  components: { LandingPage, RichTextRenderer, Event },
+  components: { LandingPage, RichTextRenderer, NestedEvent },
   data () {
     return {
     }
@@ -36,7 +36,7 @@ export default {
   methods: {
     renderEvent (node, key, h, next) {
       const props = node.data.target.fields
-      return h('Event', {props, key}, next(node.content, key, h, next))
+      return h('NestedEvent', {props, key}, next(node.content, key, h, next))
     }
   }
 }

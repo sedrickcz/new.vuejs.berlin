@@ -1,6 +1,6 @@
 <template>
-  <Layout :title="`${$page.post.title} Event`">
-    <rich-text-renderer :document="$page.post.details" />
+  <Layout :title="`Event: ${$page.post.title}`">
+    <Event v-bind="$page.post" no-title expand-talks />
   </Layout>
 </template>
 
@@ -8,14 +8,29 @@
 query ContentfulEvent ($path: String!) {
   post: contentfulEvent (path: $path) {
     title
-    slug
+    date
+    address
+    headerImage {
+      title
+      file {
+        url
+      }
+    }
     details
+    talks {
+      title
+      id
+      details
+      speakers {
+        name
+      }
+    }
   }
 }
 </page-query>
 
 <script>
-import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
+import Event from '@/components/Event'
 
 export default {
   metaInfo () {
@@ -23,6 +38,6 @@ export default {
       title: `${this.$page.post.title} Event`
     }
   },
-  components: { RichTextRenderer }
+  components: { Event }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="event-card">
-    <header :style="{backgroundImage: headerImage}">
-      <h1>{{ title }}</h1>
+    <header :style="headerStyle">
+      <h1 v-show="!noTitle">{{ title }}</h1>
       <small>{{ date }} @ {{ address }}</small>
     </header>
 
@@ -9,11 +9,11 @@
 
     <transition-group name="grow" tag="ul" class="talks-list">
       <li v-for="(talk, i) in talks" v-if="expanded"
-      :key="talk.sys.id"
+      :key="talk.id"
       :style="{transitionDelay: `${i * 100}ms`}"
       >
-        <b>{{ talk.fields.title }} by {{ talk.fields.speakers[0].fields.name }}</b>
-        <p>{{ talk.fields.details }}</p>
+        <b>{{ talk.title }} by {{ talk.speakers[0].name }}</b>
+        <p>{{ talk.details }}</p>
       </li>
     </transition-group>
 
@@ -32,17 +32,34 @@ export default {
     address: String,
     headerImage: Object,
     details: String,
-    talks: Array
+    talks: Array,
+    noTitle: Boolean,
+    expandTalks: Boolean
   },
   data () {
     return {
       expanded: false
+    }
+  },
+  mounted () {
+    this.expanded = !!this.expandTalks
+  },
+  computed: {
+    headerStyle () {
+      return {
+        backgroundImage: `url(${this.headerImage.file.url})`
+      }
     }
   }
 }
 </script>
 
 <style>
+.event-card > header {
+  padding-top: 360px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .talks-list {
   overflow: hidden;
   transition: height 350ms ease-in-out;
