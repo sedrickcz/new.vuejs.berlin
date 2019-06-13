@@ -59,7 +59,7 @@ export default {
 
 <style>
 .event-card > header {
-  padding-top: 360px;
+  padding-top: 56.25%;
   background-size: contain;
   background-repeat: no-repeat;
 }
