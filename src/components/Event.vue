@@ -12,7 +12,10 @@
       :key="talk.id"
       :style="{transitionDelay: `${i * 100}ms`}"
       >
-        <b>{{ talk.title }} by {{ talk.speakers[0].name }}</b>
+        <b>{{ talk.title }}</b>
+        <span v-show="talk.speakers.length">
+          by {{ talk.speakers.map(s => s.name).join(', ') }}
+        </span>
         <p>{{ talk.details }}</p>
       </li>
     </transition-group>

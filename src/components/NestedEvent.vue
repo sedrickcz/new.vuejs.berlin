@@ -30,6 +30,10 @@ export default {
         const speakers = (talk.speakers || []).map(s => ({...s.fields}))
         return {
           ...talk.fields,
+          id: talk.sys.id,
+          createdAt: talk.sys.createdAt,
+          updatedAt: talk.sys.updatedAt,
+          locale: talk.sys.locale,
           speakers
         }
       })
