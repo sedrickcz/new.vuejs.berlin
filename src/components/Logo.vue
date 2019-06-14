@@ -1,5 +1,7 @@
 <template>
-  <svg id="logo" alt="Vuejs Berlin Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <svg id="logo" aria-labelledby=="logo-title logo-desc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <title id="logo-title">VueJS Berlin Logo</title>
+    <desc id="logo-desc">The VueJS Berlin logo consists of the original VueJS "double-V" logo with the word Berlin cut out of the left side.</desc>
     <path id="upper" ref="upper"
         d="M 146.00,27.00
            C 147.94,27.00 151.14,26.88 152.90,27.60
