@@ -15,6 +15,19 @@
         </template>
       </li>
     </ol>
+
+    <h2>Archived Newsletters from the old homepage</h2>
+    <p>
+      Due to <span title="means: motivational problems">technical problems</span>,
+      there was a gap of four months without any newsletters. Sorry for that.
+      The April-2019 newsletter summarizes the former events.
+    </p>
+    <ol>
+      <li v-for="newsletter in oldNewsletters">
+        <g-link :to="newsletter.path">{{ newsletter.title }}</g-link>
+        (~{{ newsletter.timeToRead }} minutes read)
+      </li>
+    </ol>
   </Layout>
 </template>
 
@@ -24,11 +37,12 @@ query Newsletters {
     title
     content
   }
-  newsletters: allContentfulNewsletter {
+  newsletters: allContentfulNewsletter (sortBy: "event.date", order: ASC) {
     edges {
       node {
         title
         path
+        date
         event {
           title
           date
@@ -36,6 +50,15 @@ query Newsletters {
             id
           }
         }
+      }
+    }
+  }
+  oldNewsletters: allMarkdownNewsletter (sortBy: "date", order: DESC) {
+    edges {
+      node {
+        title
+        path
+        timeToRead
       }
     }
   }
@@ -67,6 +90,9 @@ export default {
     },
     newsletters () {
       return this.$page.newsletters.edges.map(edge => edge.node)
+    },
+    oldNewsletters () {
+      return this.$page.oldNewsletters.edges.map(edge => edge.node)
     }
   }
 }
@@ -75,6 +101,7 @@ export default {
 <style scoped>
 ol {
   list-style-type: none;
+  margin-bottom: 4em;
   padding: 0;
 }
 li {

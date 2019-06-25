@@ -1,22 +1,21 @@
 <template>
   <newsletter-view>
-    <rich-text-renderer :document="$page.post.details" />
+    <div v-html="$page.post.content" />
   </newsletter-view>
 </template>
 
 <page-query>
-query ContentfulNewsletter ($path: String!) {
-  post: contentfulNewsletter (path: $path) {
+query MarkdownNewsletter ($path: String!) {
+  post: markdownNewsletter (path: $path) {
     title
-    slug
-    details
+    content
+    path
   }
 }
 </page-query>
 
 <script>
 import NewsletterView from '@/components/NewsletterView'
-import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
 
 export default {
   metaInfo () {
@@ -24,6 +23,6 @@ export default {
       title: `${this.$page.post.title} Newsletter`
     }
   },
-  components: { NewsletterView, RichTextRenderer }
+  components: { NewsletterView }
 }
 </script>
