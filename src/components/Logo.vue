@@ -1,5 +1,5 @@
 <template>
-  <svg id="logo" aria-labelledby=="logo-title logo-desc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <svg id="logo" aria-labelledby="logo-title logo-desc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
     <title id="logo-title">VueJS Berlin Logo</title>
     <desc id="logo-desc">The VueJS Berlin logo consists of the original VueJS "double-V" logo with the word Berlin cut out of the left side.</desc>
     <path id="upper" ref="upper"
