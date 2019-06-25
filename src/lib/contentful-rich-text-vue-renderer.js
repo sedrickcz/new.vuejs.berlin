@@ -63,6 +63,13 @@ const defaultNodeRenderers = {
     [BLOCKS.QUOTE]: (node, key, h, next) => (
         h('blockquote', { key }, next(node.content, key, h, next))
     ),
+    [BLOCKS.EMBEDDED_ASSET]: (node, key, h, next) => {
+        // TODO: support other types of assets
+        const file = node.data.target.fields.file
+        const title = node.data.target.fields.title
+        const attrs = { title, src: file.url }
+        return h('img', { key, attrs: { title, src: file.url } }, next(node.content, key, h, next))
+    },
     [BLOCKS.HR]: (_node, key, h) => h('hr', { key }, {}),
     [INLINES.ASSET_HYPERLINK]: (node, key, h) =>
         defaultInline(INLINES.ASSET_HYPERLINK, node, key, h),
