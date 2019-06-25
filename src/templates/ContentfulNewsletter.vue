@@ -26,3 +26,13 @@ export default {
   components: { RichTextRenderer }
 }
 </script>
+
+<style scoped>
+ul {
+  padding: 0 0 0 .8em;
+}
+ul > li > p {
+  margin: 0;
+  line-height: 1.5em;
+}
+</style>
