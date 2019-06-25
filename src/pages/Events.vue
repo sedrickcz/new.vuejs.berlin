@@ -4,8 +4,10 @@
     <rich-text-renderer :document="content" />
     <ol>
       <li v-for="event in events">
-        <g-link :to="event.path">{{ event.title }}</g-link>:
-        ({{ event.date }}, {{ event.talks.length }} talks)
+        <g-link :to="event.path">{{ event.title }}</g-link>
+        <span style="float: right">
+          ({{ dateFmt(event) }}, {{ event.talks.length }} talks)
+        </span>
       </li>
     </ol>
   </Layout>
@@ -34,6 +36,7 @@ query Events {
 
 <script>
 import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
+import { dateFmt } from '@/lib/date'
 
 export default {
   metaInfo () {
@@ -51,6 +54,11 @@ export default {
     },
     events () {
       return this.$page.events.edges.map(edge => edge.node)
+    }
+  },
+  methods: {
+    dateFmt (event) {
+      return dateFmt(event.date, 'YYYY-MM-DD HHh')
     }
   }
 }
