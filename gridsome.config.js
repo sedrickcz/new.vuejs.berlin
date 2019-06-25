@@ -19,6 +19,14 @@ module.exports = {
         typeName: 'Contentful'
       }
     },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: './src/markdown/newsletters/*.md',
+        typeName: 'MarkdownNewsletter',
+        route: '/archive/newsletter/:slug'
+      }
+    }
     /*
     {
       use: 'gridsome-plugin-feed',
