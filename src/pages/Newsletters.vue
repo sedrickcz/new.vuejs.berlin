@@ -5,7 +5,14 @@
     <ol>
       <li v-for="newsletter in newsletters">
         <g-link :to="newsletter.path">{{ newsletter.title }}</g-link>:
-        {{ newsletter.event.title }} ({{ newsletter.event.date }}, {{ newsletter.event.talks.length }} talks)
+        <template v-if="newsletter.event">
+        {{ newsletter.event.title }}
+        ({{ niceDate(newsletter.event.date) }},
+        {{ newsletter.event.talks.length }} talks)
+        </template>
+        <template v-else>
+        This newsletter is not associated with particular event.
+        </template>
       </li>
     </ol>
   </Layout>
@@ -36,6 +43,7 @@ query Newsletters {
 </page-query>
 
 <script>
+import { dateFmt } from '@/lib/date'
 import RichTextRenderer from '@/lib/contentful-rich-text-vue-renderer'
 
 export default {
@@ -45,6 +53,11 @@ export default {
     }
   },
   components: { RichTextRenderer },
+  methods: {
+    niceDate (date) {
+      return dateFmt(date, 'YYYY-MM-DD')
+    }
+  },
   computed: {
     title () {
       return this.$page.page.title
@@ -63,5 +76,8 @@ export default {
 ol {
   list-style-type: none;
   padding: 0;
+}
+li {
+  line-height: 2em;
 }
 </style>
