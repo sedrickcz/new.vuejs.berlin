@@ -15,7 +15,8 @@ body {
 }
 a {
   text-decoration: none;
-  color: #41B883;
+  color: #3aa676;
+  font-weight: bold;
 }
 a.go-back {
   float: left;

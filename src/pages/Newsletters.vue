@@ -1,6 +1,5 @@
 <template>
-  <Layout>
-    <h1>{{ title }}</h1>
+  <Layout :title="title">
     <rich-text-renderer :document="content" />
     <ol>
       <li v-for="newsletter in newsletters">

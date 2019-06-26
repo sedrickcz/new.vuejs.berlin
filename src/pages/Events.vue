@@ -1,6 +1,5 @@
 <template>
-  <Layout>
-    <h1>{{ title }}</h1>
+  <Layout :title="title">
     <rich-text-renderer :document="content" />
     <ol>
       <li v-for="event in events">
@@ -68,5 +67,8 @@ export default {
 ol {
   list-style-type: none;
   padding: 0;
+}
+li {
+  line-height: 2em;
 }
 </style>

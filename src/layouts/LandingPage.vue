@@ -55,7 +55,8 @@ export default {
   width: 100vw;
   top: 75vh;
   text-align: center;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, .65);
+  font-weight: bold;
 }
 #wallpaper.lazy-load-progress { filter: blur(5px) saturate(25%); }
 #wallpaper.lazy-load-success { opacity: 1; }
@@ -73,6 +74,9 @@ export default {
   width: 97%;
   font-size: 1rem;
   text-align: right;
-  color: rgba(255, 255, 255, .4);
+  color: rgba(255, 255, 255, .6);
+}
+#wallpaper > footer a {
+  color: #41b883;
 }
 </style>

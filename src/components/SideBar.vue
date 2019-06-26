@@ -86,7 +86,10 @@ ol.sidebar > label {
   line-height: 2em;
 }
 ol.sidebar > label > a {
-  color: #DDD;
+  color: #949494;
+}
+ol.sidebar > li {
+  line-height: 1.5em;
 }
 .sidebar-home {
   display: block;
