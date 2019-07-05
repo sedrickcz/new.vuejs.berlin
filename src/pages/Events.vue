@@ -9,6 +9,12 @@
         </span>
       </li>
     </ol>
+
+    <h2>Older Events</h2>
+    <p>
+      You can find older events on the
+      <a href="https://www.meetup.com/de-DE/Vue-js-Berlin/events/past/">Meetup Page</a>.
+    </p>
   </Layout>
 </template>
 
