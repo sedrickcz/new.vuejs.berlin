@@ -7,19 +7,21 @@
 </template>
 
 <static-query>
-query AllNewsletters {
-  contentful: allContentfulNewsletter (sortBy: "date", order: DESC) {
+query AllNewslettersForNav {
+  contentful: allContentfulNewsletter (sortBy: "slug", order: DESC) {
     edges {
       node {
         title
+        slug
         path
       }
     }
   }
-  markdown: allMarkdownNewsletter {
+  markdown: allMarkdownNewsletter (sortBy: "slug", order: DESC) {
     edges {
       node {
         title
+        slug
         path
       }
     }
@@ -33,18 +35,18 @@ export default {
     allNewsletters () {
       const newNewsletters = this.$static.contentful.edges.map(e => e.node)
       const oldNewsletters = this.$static.markdown.edges.map(e => e.node)
-      oldNewsletters.reverse()
+
       return [...newNewsletters, ...oldNewsletters]
     },
     currentNewsletterIndex () {
-      const path = this.$page.post.path
-      return this.allNewsletters.findIndex(nl => nl.path === path)
+      const title = this.$page.post.title
+      return this.allNewsletters.findIndex(nl => nl.title === title)
     },
     prev () {
-      return this.allNewsletters[this.currentNewsletterIndex - 1]
+      return this.allNewsletters[this.currentNewsletterIndex + 1]
     },
     next () {
-      return this.allNewsletters[this.currentNewsletterIndex + 1]
+      return this.allNewsletters[this.currentNewsletterIndex - 1]
     }
   }
 }

@@ -36,7 +36,7 @@ query Newsletters {
     title
     content
   }
-  newsletters: allContentfulNewsletter (sortBy: "event.date", order: ASC) {
+  newsletters: allContentfulNewsletter (sortBy: "slug", order: DESC) {
     edges {
       node {
         title

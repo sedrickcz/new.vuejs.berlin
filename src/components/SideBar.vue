@@ -5,18 +5,24 @@
     </router-link>
     <ol class="sidebar">
       <label>
-        <router-link to="/newsletters">Newsletters</router-link>
+        Newsletters
       </label>
-      <li v-for="item in newsletters">
+      <li v-for="item in newsletters" :title="item.title">
         <router-link :to="item.path">{{ item.title }}</router-link>
+      </li>
+      <li>
+        <router-link to="/newsletters">...all newsletters</router-link>
       </li>
     </ol>
     <ol class="sidebar">
       <label>
-        <router-link to="/events">Events</router-link>
+        Events
       </label>
-      <li v-for="item in events">
+      <li v-for="item in events" :title="item.title">
         <router-link :to="item.path">{{ item.title }}</router-link>
+      </li>
+      <li>
+        <router-link to="/events">...all events</router-link>
       </li>
     </ol>
   </nav>
@@ -24,7 +30,7 @@
 
 <static-query>
 query MenuItems {
-  newsletters: allContentfulNewsletter {
+  newsletters: allContentfulNewsletter (sortBy: "slug", order: DESC, limit: 3) {
     edges {
       node {
         path
@@ -32,7 +38,7 @@ query MenuItems {
       }
     }
   }
-  events: allContentfulEvent {
+  events: allContentfulEvent (sortBy: "date", order: DESC, limit: 3) {
     edges {
       node {
         path
@@ -90,6 +96,10 @@ ol.sidebar > label > a {
 }
 ol.sidebar > li {
   line-height: 1.5em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .sidebar-home {
   display: block;
