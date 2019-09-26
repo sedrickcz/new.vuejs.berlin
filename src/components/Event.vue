@@ -63,11 +63,34 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.talks-list {
+.event-card > button {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  width: 10em;
+  font-size: .8em;
+  margin: 0 auto 3em;
+  color: #3aa676;
+  border: none;
+  border-left: 1px solid #AAA;
+  border-right: 1px solid #AAA;
+  background-color: white;
+}
+.event-card > button::after {
+  content: "";
+  position: absolute;
+  left: calc(-1 * (320px - 5em));
+  top: .85em;
+  width: 640px;
+  border-bottom: 1px solid #AAA;
+  z-index: -1;
+}
+.event-card > ul.talks-list {
+  margin: 0;
   overflow: hidden;
   transition: height 350ms ease-in-out;
 }
-.talks-list > li {
+.event-card > ul.talks-list > li {
   display: block;
   background-color: white;
 }
